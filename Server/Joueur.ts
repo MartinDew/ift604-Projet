@@ -1,4 +1,9 @@
-class Joueur {
+export class Joueur {
+  prenom: string;
+  nom: string;
+  age: number;
+  rang: string;
+  pays: string;
   constructor(prenom, nom, age, rang, pays) {
     this.prenom = prenom;
     this.nom = nom;
@@ -7,5 +12,3 @@ class Joueur {
     this.pays = pays;
   }
 }
-
-module.exports = Joueur;

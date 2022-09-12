@@ -1,7 +1,19 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Pointage = require('./Pointage.js');
+import { Joueur } from 'Joueur';
+import { Pointage } from 'Pointage';
 
-class Partie {
+export class Partie {
+  joueur1: Joueur;
+  joueur2: Joueur;
+  terrain: any;
+  tournoi: any;
+  heure_debut: any;
+  pointage: Pointage;
+  temps_partie: number;
+  joueur_au_service: number;
+  vitesse_dernier_service: number;
+  nombre_coup_dernier_echange: number;
+  constestation: number[];
+  tick_debut: any;
   constructor(joueur1, joueur2, terrain, tournoi, heureDebut, tickDebut) {
     this.joueur1 = joueur1;
     this.joueur2 = joueur2;
@@ -37,11 +49,11 @@ class Partie {
     if (!contestationReussi) {
       this.pointage.ajouterPoint(Math.floor(Math.random() * 2));
     }
-    this.temps_partie += Math.floor(Math.random() * 60); // entre 0 et 60 secondes entre chaque point
+    this.temps_partie += Math.floor(Math.random() * 60); // Entre 0 et 60 secondes entre chaque point
     this.vitesse_dernier_service =
-      Math.floor(Math.random() * (250 - 60 + 1)) + 60; // entre 60 et 250 km/h
+      Math.floor(Math.random() * (250 - 60 + 1)) + 60; // Entre 60 et 250 km/h
     this.nombre_coup_dernier_echange =
-      Math.floor(Math.random() * (30 - 1 + 1)) + 1; // entre 1 et 30 coups par échange
+      Math.floor(Math.random() * (30 - 1 + 1)) + 1; // Entre 1 et 30 coups par échange
   }
 
   static contester() {
@@ -76,4 +88,3 @@ class Partie {
     };
   }
 }
-module.exports = Partie;

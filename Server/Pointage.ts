@@ -1,4 +1,9 @@
-class Pointage {
+export class Pointage {
+  manches: number[];
+  jeu: number[][];
+  echange: number[];
+  final: boolean;
+  parent: any;
   constructor(parent) {
     this.manches = [0, 0];
     this.jeu = [[0, 0]];
@@ -11,17 +16,17 @@ class Pointage {
   ajouterPoint(joueur) {
     const mancheCourante = this.manches.reduce((a, b) => a + b, 0);
 
-    // incrementer l'echange
+    // Incrementer l'échange
     this.echange[joueur] += 1;
 
-    // si requis, incrementer le jeu
+    // Si requis, incrémenter le jeu
     if (this.echange[joueur] === 4) {
       this.echange = [0, 0];
       this.jeu[mancheCourante][joueur] += 1;
       this.parent.changerServeur();
     }
 
-    // si requis, incrementer la manche
+    // Si requis, incrémenter la manche
     if (this.jeu[mancheCourante][joueur] === 6) {
       this.manches[joueur] += 1;
       this.parent.nouvelleManche();
@@ -30,7 +35,7 @@ class Pointage {
       }
     }
 
-    // si le match est termine, le dire
+    // Si le match est terminée, le dire
     if (this.manches[joueur] === 2) {
       this.final = true;
     }
@@ -45,5 +50,3 @@ class Pointage {
     };
   }
 }
-
-module.exports = Pointage;

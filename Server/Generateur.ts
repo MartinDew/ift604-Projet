@@ -1,9 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Partie = require('./Partie');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Joueur = require('./Joueur');
+import { Joueur } from 'Joueur';
+import { Partie } from 'Partie';
 
-const modificateurVitesse = Math.max(process.argv[2], 1);
+const modificateurVitesse = Math.max(Number(process.argv[2]), 1);
 
 const listePartie = [];
 
@@ -28,7 +26,7 @@ listePartie.push(
   ),
 );
 
-const demarrer = function () {
+export const demarrer = function () {
   let tick = 0;
   setInterval(function () {
     for (const partie in listePartie) {
@@ -41,7 +39,7 @@ const demarrer = function () {
   }, Math.floor(1000 / modificateurVitesse));
 };
 
-function demarrerPartie(partie) {
+export function demarrerPartie(partie) {
   const timer = setInterval(function () {
     partie.jouerTour();
     if (partie.estTerminee()) {
@@ -49,7 +47,3 @@ function demarrerPartie(partie) {
     }
   }, Math.floor(1000 / modificateurVitesse));
 }
-
-module.exports = {};
-module.exports.demarrer = demarrer;
-module.exports.liste_partie = listePartie;
