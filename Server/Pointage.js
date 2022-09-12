@@ -1,5 +1,5 @@
 class Pointage {
-  constructor (parent) {
+  constructor(parent) {
     this.manches = [0, 0];
     this.jeu = [[0, 0]];
     this.echange = [0, 0];
@@ -8,7 +8,7 @@ class Pointage {
     this.parent = parent;
   }
 
-  ajouterPoint (joueur) {
+  ajouterPoint(joueur) {
     const mancheCourante = this.manches.reduce((a, b) => a + b, 0);
 
     // incrementer l'echange
@@ -36,12 +36,12 @@ class Pointage {
     }
   }
 
-  toJSON () {
+  toJSON() {
     return {
-      'manches': this.manches,
-      'jeu': this.jeu,
-      'echange': this.echange,
-      'final': this.final
+      manches: this.manches,
+      jeu: this.jeu,
+      echange: this.echange,
+      final: this.final,
     };
   }
 }

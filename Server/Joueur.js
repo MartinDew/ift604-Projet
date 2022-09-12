@@ -1,5 +1,5 @@
 class Joueur {
-  constructor (prenom, nom, age, rang, pays) {
+  constructor(prenom, nom, age, rang, pays) {
     this.prenom = prenom;
     this.nom = nom;
     this.age = age;
