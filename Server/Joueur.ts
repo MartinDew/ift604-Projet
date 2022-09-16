@@ -2,7 +2,7 @@ export class Joueur {
   prenom: string;
   nom: string;
   age: number;
-  rang: string;
+  rang: number;
   pays: string;
   constructor(prenom, nom, age, rang, pays) {
     this.prenom = prenom;
