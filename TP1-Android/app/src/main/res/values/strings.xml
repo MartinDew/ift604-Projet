@@ -1,5 +1,5 @@
 <resources>
-    <string name="base_url">http://localhost:3000/</string>
+    <string name="base_url">http://10.0.2.2:3000/</string>
     <string name="app_name">TP1-B</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

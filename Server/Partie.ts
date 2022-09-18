@@ -2,19 +2,21 @@ import { Joueur } from 'Joueur';
 import { Pointage } from 'Pointage';
 
 export class Partie {
+  id_partie: number;
   joueur1: Joueur;
   joueur2: Joueur;
-  terrain: any;
-  tournoi: any;
-  heure_debut: any;
+  terrain: string;
+  tournoi: string;
+  heure_debut: string;
   pointage: Pointage;
   temps_partie: number;
   joueur_au_service: number;
   vitesse_dernier_service: number;
   nombre_coup_dernier_echange: number;
   constestation: number[];
-  tick_debut: any;
-  constructor(joueur1, joueur2, terrain, tournoi, heureDebut, tickDebut) {
+  tick_debut: number;
+  constructor(id_partie, joueur1, joueur2, terrain, tournoi, heureDebut, tickDebut) {
+    this.id_partie = id_partie;
     this.joueur1 = joueur1;
     this.joueur2 = joueur2;
     this.terrain = terrain;
@@ -74,6 +76,7 @@ export class Partie {
 
   toJSON() {
     return {
+      id_partie: this.id_partie,
       joueur1: this.joueur1,
       joueur2: this.joueur2,
       terrain: this.terrain,

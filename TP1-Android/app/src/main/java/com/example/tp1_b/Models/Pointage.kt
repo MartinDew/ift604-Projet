@@ -1,9 +1,11 @@
 package com.example.tp1_b.Models
 
+import com.beust.klaxon.Json
+
 class Pointage(
-    var manches: Array<UInt>,
-    var jeu: Array<Array<UInt>>,
-    var echange: Array<UInt>,
-    var final: Boolean,
-    var parent: Partie,
-) {}
+    var manches: ArrayList<Int> = ArrayList(),
+    var jeu: ArrayList<ArrayList<Int>> = ArrayList(),
+    var echange: ArrayList<Int> = ArrayList(),
+    var final: Boolean = false,
+    var parent: Partie? = null,
+)

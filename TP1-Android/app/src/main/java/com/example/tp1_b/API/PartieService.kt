@@ -11,14 +11,17 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class PartieService(context: Context) : Service(context) {
-    fun commonSetup(conn: HttpURLConnection) {
-
+    fun getParties(dataCallback: (ArrayList<Partie>) -> Unit, errCallback: (Exception) -> Unit) {
+        getRequest(
+            URL(baseUrl + "parties").openConnection() as HttpURLConnection,
+            dataCallback,
+            errCallback
+        )
     }
 
-    fun getParties(dataCallback: (Array<Partie>) -> Unit, errCallback: (Exception) -> Unit) {
-        Get(
-            URL(baseUrl + "parties"),
-            ::commonSetup,
+    fun getPartie(idPartie: Int, dataCallback: (Partie) -> Unit, errCallback: (Exception) -> Unit) {
+        getRequest(
+            URL(baseUrl + "parties/" + idPartie).openConnection() as HttpURLConnection,
             dataCallback,
             errCallback
         )

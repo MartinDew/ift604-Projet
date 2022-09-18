@@ -13,7 +13,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.beust.klaxon.Json
+import com.beust.klaxon.JsonObject
+import com.beust.klaxon.Klaxon
 import com.example.tp1_b.API.PartieService
+import com.example.tp1_b.Models.Pointage
 import com.example.tp1_b.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import kotlin.concurrent.thread
@@ -26,10 +30,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) = runBlocking {
         super.onCreate(savedInstanceState)
 
-        val ps = PartieService(applicationContext)
-        ps.getParties(
-            { parties ->
-
+        PartieService(applicationContext).getPartie(
+            0,
+            { partie ->
+                println(partie)
             },
             { err -> runOnUiThread {
                 Toast.makeText(applicationContext, err.message, Toast.LENGTH_LONG).show()

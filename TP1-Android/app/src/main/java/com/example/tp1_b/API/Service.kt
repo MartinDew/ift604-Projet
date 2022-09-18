@@ -11,28 +11,43 @@ import kotlin.concurrent.thread
 open class Service(context: Context) {
     protected val baseUrl = context.getString(R.string.base_url)
 
-    protected inline fun <reified T> Get(
-        url: URL,
-        crossinline setup: (HttpURLConnection) -> Unit,
+    @JvmName("GetArray")
+    protected inline fun <reified T> getRequest(
+        conn: HttpURLConnection,
+        crossinline dataCallback: (ArrayList<T>) -> Unit,
+        crossinline errCallback: (Exception) -> Unit)
+    {
+        runGetRequest(conn, dataCallback, errCallback) { Klaxon().parseArray<T>(it) as ArrayList<T> }
+    }
+
+    @JvmName("Get")
+    protected inline fun <reified T> getRequest(
+        conn: HttpURLConnection,
         crossinline dataCallback: (T) -> Unit,
         crossinline errCallback: (Exception) -> Unit)
     {
+        runGetRequest(conn, dataCallback, errCallback) { Klaxon().parse<T>(it) as T }
+    }
+
+    protected inline fun <reified T> runGetRequest(
+        conn: HttpURLConnection,
+        crossinline dataCallback: (T) -> Unit,
+        crossinline errCallback: (Exception) -> Unit,
+        crossinline parseFun: (String) -> T
+    )
+    {
         thread(start = true) {
             try {
-                var parties: T?
+                conn.requestMethod = "GET"
 
-                val conn = url.openConnection() as HttpURLConnection
-                setup(conn)
-
-                with(conn) {
-                    parties = Klaxon().parse(inputStream.bufferedReader().readText())
+                val statusCode = conn.responseCode
+                if (statusCode != 200) {
+                    val errMsg = conn.errorStream.bufferedReader().readText()
+                    throw Exception(errMsg)
                 }
 
-                if (parties == null) {
-                    errCallback(Exception("Couldn't parse JSON"))
-                } else {
-                    dataCallback(parties as T)
-                }
+                val text = conn.inputStream.bufferedReader().readText()
+                dataCallback(parseFun(text))
             } catch (e: Exception) {
                 errCallback(e)
             }

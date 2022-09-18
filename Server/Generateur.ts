@@ -3,10 +3,11 @@ import { Partie } from 'Partie';
 
 const modificateurVitesse = Math.max(Number(process.argv[2]), 1);
 
-const listePartie = [];
+export const listePartie = [];
 
 listePartie.push(
   new Partie(
+    listePartie.length,
     new Joueur('Albert', 'Ramos', 28, 56, 'Espagne'),
     new Joueur('Milos', 'Raonic', 28, 16, 'Canada'),
     '1',
@@ -17,6 +18,7 @@ listePartie.push(
 );
 listePartie.push(
   new Partie(
+    listePartie.length,
     new Joueur('Andy', 'Murray', 28, 132, 'Angleterre'),
     new Joueur('Andy', 'Roddick', 36, 1000, 'États-Unis'),
     '2',
