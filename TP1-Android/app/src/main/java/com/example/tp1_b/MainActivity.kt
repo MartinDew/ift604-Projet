@@ -2,7 +2,6 @@ package com.example.tp1_b
 
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -13,14 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.beust.klaxon.Json
-import com.beust.klaxon.JsonObject
-import com.beust.klaxon.Klaxon
-import com.example.tp1_b.API.PartieService
-import com.example.tp1_b.Models.Pointage
 import com.example.tp1_b.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 

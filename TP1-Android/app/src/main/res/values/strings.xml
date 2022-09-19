@@ -11,6 +11,7 @@
     <string name="partie_item_view_nom_joueur">%1$s %2$s</string>
     <string name="partie_item_view_tournament_title">Tournoi :</string>
     <string name="partie_item_view_VS">VS</string>
+    <string name="partie_item_view_score">%1$d/%2$d/%3$d</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Parties</string>

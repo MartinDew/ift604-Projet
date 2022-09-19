@@ -1,7 +1,8 @@
 package com.example.tp1_b.Models
 
-import com.beust.klaxon.Json
+import kotlinx.serialization.Serializable
 
+@Serializable
 class Pointage(
     var manches: ArrayList<Int> = ArrayList(),
     var jeu: ArrayList<ArrayList<Int>> = ArrayList(),

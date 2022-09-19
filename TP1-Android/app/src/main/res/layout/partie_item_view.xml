@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:textAlignment="viewEnd" />
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -45,8 +45,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:textAlignment="viewStart" />
+                android:textAlignment="center" />
 
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/partie_item_view_score_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:textAlignment="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/partie_item_view_score_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:textAlignment="center"
+                android:text="" />
         </TableRow>
 
     </TableLayout>

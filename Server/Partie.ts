@@ -84,7 +84,7 @@ export class Partie {
       heure_debut: this.heure_debut,
       pointage: this.pointage,
       temps_partie: this.temps_partie,
-      serveur: this.joueur_au_service,
+      joueur_au_service: this.joueur_au_service,
       vitesse_dernier_service: this.vitesse_dernier_service,
       nombre_coup_dernier_echange: this.nombre_coup_dernier_echange,
       constestation: this.constestation,

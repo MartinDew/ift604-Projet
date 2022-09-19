@@ -5,9 +5,9 @@ export class Pointage {
   final: boolean;
   parent: any;
   constructor(parent) {
-    this.manches = [0, 0];
-    this.jeu = [[0, 0]];
-    this.echange = [0, 0];
+    this.manches = [0, 0]; // sets won
+    this.jeu = [[0, 0]]; // sets (last is current)
+    this.echange = [0, 0]; // current score
     this.final = false;
 
     this.parent = parent;
