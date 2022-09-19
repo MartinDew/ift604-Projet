@@ -1,9 +1,9 @@
 package com.example.tp1_b.Models
 
 class Joueur(
-    val prenom: String = "",
-    val nom: String = "",
+    val prenom: String = "<no first name>",
+    val nom: String = "<no last name>",
     val age: Int = -1,
     val rang: Int = -1,
-    val pays: String = "",
+    val pays: String = "<no country>",
 )
