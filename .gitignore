@@ -503,3 +503,4 @@ fabric.properties
 *.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,web,csharp,dotnetcore
+.idea

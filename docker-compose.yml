@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+    api:
+        image: martindew/broomit-api
+        build: 
+            dockerfile: ./BroomitApi/Dockerfile
+            context: .
+        ports:
+            - "3600:80"
+    db:
+    # use mongodb
+        image: mongo
+        ports:
+            - "27017:27017"
+        volumes:
+            - db-vol:/data/db
+        restart: always
+
+volumes:
+    db-vol:
+
