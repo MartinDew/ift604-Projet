@@ -1,3 +1,6 @@
+using BroomitApi.Models;
+using BroomitApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add the database context
+builder.Services.Configure<BroomitDatabaseSettings>(
+    builder.Configuration.GetSection("BroomitDatabase"));
+
+builder.Services.AddSingleton<UserService>();
 
 var app = builder.Build();
 

@@ -1,9 +1,22 @@
-﻿namespace BroomitApi2.Models;
+﻿namespace BroomitApi.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 public class User
 {
-    public int Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    [BsonElement("Name")]
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
+    
+    // Constructor
+    public User(string username, string password, string email)
+    {
+        Username = username;
+        Password = password;
+        Email = email;
+    }
 }
