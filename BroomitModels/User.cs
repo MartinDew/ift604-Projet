@@ -1,4 +1,4 @@
-﻿namespace BroomitApi.Models;
+﻿namespace BroomitModels;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -11,7 +11,10 @@ public class User
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    
+
+    public List<Task> Tasks { get; set; }
+    public List<Location> Locations { get; set; }
+
     // Constructor
     public User(string username, string password, string email)
     {

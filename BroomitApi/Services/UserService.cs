@@ -1,4 +1,5 @@
 ﻿using BroomitApi.Models;
+using User = BroomitModels.User;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
