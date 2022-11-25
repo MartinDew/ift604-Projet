@@ -11,4 +11,5 @@ public class Location
     public string Address { get; set; }
     public string Notes { get; set; } = "";
     public string OwnerPhoneNumber { get; set; } = "";
+    public List<Task> Tasks { get; set; }
 }

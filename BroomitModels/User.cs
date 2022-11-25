@@ -12,7 +12,6 @@ public class User
     public string Password { get; set; }
     public string Email { get; set; }
 
-    public List<Task> Tasks { get; set; }
     public List<Location> Locations { get; set; }
 
     // Constructor
