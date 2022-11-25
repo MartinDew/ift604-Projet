@@ -32,12 +32,9 @@ public class UserController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<User>> CreateUser(
-        String userName,
-        String password,
-         string email)
+    public async Task<ActionResult<User>> CreateUser(User user)
     {
-        var result = await _userService.CreateUserAsync(userName, password, email);
+        var result = await _userService.CreateUserAsync(user);
         return CreatedAtAction(nameof(GetUser), new { id = result.Id }, result);
     }
 

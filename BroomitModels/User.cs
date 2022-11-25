@@ -1,4 +1,6 @@
 ﻿namespace BroomitModels;
+using System.Text.Json.Serialization;
+
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -6,19 +8,18 @@ public class User
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
+    [JsonPropertyName("id")]
     public string? Id { get; set; }
-    [BsonElement("Name")]
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
 
-    public List<Location> Locations { get; set; }
+    [JsonPropertyName("username")]
+    public string? Username { get; set; }
 
-    // Constructor
-    public User(string username, string password, string email)
-    {
-        Username = username;
-        Password = password;
-        Email = email;
-    }
+    [JsonPropertyName("password")]
+    public string? Password { get; set; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; set; }
+
+    [JsonPropertyName("locations")]
+    public List<Location>? Locations { get; set; }
 }

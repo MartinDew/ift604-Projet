@@ -1,4 +1,6 @@
-﻿namespace BroomitModels;
+﻿using System.Text.Json.Serialization;
+
+namespace BroomitModels;
 public class Schedule
 {
     public enum ScheduleType
@@ -10,16 +12,19 @@ public class Schedule
     /// Initial scheduled date time
     /// Exception: if type == Weekly it should be the sunday of that week
     /// </summary>
+    [JsonPropertyName("start_date_time")]
     public DateTime StartDateTime { get; set; }
 
     /// <summary>
     /// Recurrence of the schedule "every n days" for example
     /// </summary>
-    public uint EveryN { get; set; }
+    [JsonPropertyName("every_n")]
+    public uint EveryN { get; set; } = 0;
 
     /// <summary>
     /// Type of the recurrence of the schedule
     /// </summary>
+    [JsonPropertyName("type")]
     public ScheduleType Type { get; set; }
 
     /// <summary>
@@ -28,19 +33,24 @@ public class Schedule
     /// value 0 => sunday 
     /// value 7 => saturday
     /// </summary>
-    public uint[] Days { get; set; }
+    [JsonPropertyName("days")]
+    public List<uint> Days { get; set; } = new List<uint>();
 
     /// <summary>
     /// Gets the date from the StartTime
     /// </summary>
+    [JsonIgnore]
     public DateOnly Date => DateOnly.FromDateTime(StartDateTime);
+    [JsonIgnore]
     public string StringDate => Date.ToString();
 
     /// <summary>
     /// Gets the time from the StartTime
     /// </summary>
+    [JsonIgnore]
     public TimeOnly Time => TimeOnly.FromDateTime(StartDateTime);
-    public string StringTime => Time.ToString("g");
+    [JsonIgnore]
+    public string StringTime => Time.ToString();
 
     public bool IsScheduled(DateOnly date) => Type switch {
         ScheduleType.Daily => (date.DayNumber - Date.DayNumber) % EveryN == 0,
