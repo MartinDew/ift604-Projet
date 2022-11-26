@@ -1,4 +1,3 @@
 package projet.ift604.broomitclient
 
-class Constants {
-}
+val API_URL = "http://localhost:0708"
