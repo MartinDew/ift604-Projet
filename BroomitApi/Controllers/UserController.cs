@@ -2,9 +2,8 @@
 using BroomitApi.Services;
 using BroomitModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace BroomitApi2.Controllers;
+namespace BroomitApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -15,27 +14,28 @@ public class UserController : ControllerBase
     public UserController(UserService userService) => 
         _userService = userService;
     
-    [HttpGet]
-    public async Task<List<User>> GetUsers() => await _userService.GetUsersAsync();
-    
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<User>> GetUser([FromBody] Guid id)
+    public async Task<ActionResult<User>> GetUser([FromRoute] string id)
     {
-        var result = await _userService.GetUserAsync(id.ToString());
+        var result = await _userService.GetUserAsync(id);
         if (result is null)
             return NotFound();
         return result;
     }
     
+    
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<User>> CreateUser(User user)
+    public async Task<ActionResult<string>> CreateUser([FromBody] User user)
     {
+        if (user.Username?.Length == 0 || user.Password?.Length == 0 || user.Email?.Length == 0)
+            return BadRequest();
+
         var result = await _userService.CreateUserAsync(user);
-        return CreatedAtAction(nameof(GetUser), new { id = result.Id }, result);
+        return result.Id;
     }
 
     [HttpPut("{id}")]
@@ -46,7 +46,7 @@ public class UserController : ControllerBase
         if (id != user.Id)
             return BadRequest();
         await _userService.UpdateUserAsync(id, user);
-        return NoContent();
+        return Ok();
     }
     
     [HttpDelete("{id}")]
