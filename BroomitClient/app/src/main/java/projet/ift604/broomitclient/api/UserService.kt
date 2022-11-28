@@ -7,6 +7,7 @@ import projet.ift604.broomitclient.models.User
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -50,6 +51,7 @@ interface UserService {
 
             val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

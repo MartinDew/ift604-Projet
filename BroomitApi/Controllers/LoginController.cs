@@ -16,7 +16,7 @@ public class LoginController : Controller
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Guid>> Login([FromBody] LoginRequest loginRequest)
+    public async Task<ActionResult<string>> Login([FromBody] LoginRequest loginRequest)
     {
         if (loginRequest.Username?.Length == 0 || loginRequest.Password?.Length == 0)
             return BadRequest();
@@ -24,6 +24,7 @@ public class LoginController : Controller
         var guid = await _userService.LoginAsync(loginRequest);
         if (guid is null)
             return BadRequest();
+
         return guid;
     }
 }

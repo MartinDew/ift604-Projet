@@ -1,5 +1,7 @@
 package projet.ift604.broomitclient.models
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalDateTime
@@ -31,7 +33,7 @@ class Schedule(
     }
 
     fun isScheduledWeek(date: LocalDate): Boolean {
-        val currentDayOfWeek = date.dayOfWeek as UInt
+        val currentDayOfWeek = date.dayOfWeek.value.toUInt()
 
         // first day of the current week
         val currentWeekNumber = date.toEpochDays().toUInt() - currentDayOfWeek / 7U

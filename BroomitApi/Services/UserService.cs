@@ -22,13 +22,13 @@ public class UserService
         return await _usersCollection.Find(user => true).ToListAsync();
     }
 
-    public async Task<Guid?>? LoginAsync(LoginRequest login)
+    public async Task<string?>? LoginAsync(LoginRequest login)
     {
         var user = await _usersCollection.Find(user => user.Username == login.Username).FirstOrDefaultAsync();
         if (user == null) return null;
 
         if (user.Password == login.Password)
-            return new Guid(user.Id);
+            return user.Id;
 
         return null;
     }

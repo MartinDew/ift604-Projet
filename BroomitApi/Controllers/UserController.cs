@@ -34,6 +34,7 @@ public class UserController : ControllerBase
         if (user.Username?.Length == 0 || user.Password?.Length == 0 || user.Email?.Length == 0)
             return BadRequest();
 
+        user.Locations = new List<Location>();
         var result = await _userService.CreateUserAsync(user);
         return result.Id;
     }

@@ -1,21 +1,21 @@
 package projet.ift604.broomitclient.ui.login
 
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import projet.ift604.broomitclient.ApplicationState
+import projet.ift604.broomitclient.MainActivity
 import projet.ift604.broomitclient.R
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.databinding.ActivityLoginBinding
-import java.lang.Exception
+import projet.ift604.broomitclient.toHex
+import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
@@ -44,9 +44,10 @@ class LoginActivity : AppCompatActivity() {
             val pass = binding.password.text.toString()
 
             val digest = MessageDigest.getInstance("SHA-256")
-            val hash = digest.digest(pass.toByteArray()).toString()
+            val hash = digest.digest(pass.toByteArray(StandardCharsets.UTF_8)).toHex()
 
-            lifecycleScope.launch(Dispatchers.IO) {
+            val handler = CoroutineExceptionHandler { _, err -> err.printStackTrace() }
+            lifecycleScope.launch(Dispatchers.IO + handler) {
                 val state = ApplicationState.getInstance()
                 try {
                     if (binding.toggleLoginType.isChecked) {
@@ -66,7 +67,8 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 if (state.loggedIn) {
-                    // @TODO: Redirect to main activity
+                    val myIntent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(myIntent)
                 }
             }
         }

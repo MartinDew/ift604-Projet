@@ -1,6 +1,14 @@
 package projet.ift604.broomitclient
 
+import android.telephony.TelephonyCallback.CellLocationListener
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import projet.ift604.broomitclient.api.UserService
+import projet.ift604.broomitclient.models.Task
 import projet.ift604.broomitclient.models.User
 import java.lang.Exception
 
@@ -8,7 +16,10 @@ class ApplicationState {
     class HttpException(val code: Int, val msg: String = "") : Throwable()
 
     var loggedIn: Boolean = false
-    var user: User? = null
+
+    var userMutex: Mutex = Mutex()
+    val user get() = _user!!
+    var _user: User? = null
 
     fun getUser(userId: String) {
         val service = UserService.getInstance()
@@ -17,7 +28,7 @@ class ApplicationState {
         val body = resp.body()
 
         if (resp.code() == 200 && body != null) {
-            user = body
+            _user = body
         } else {
             val err = resp.errorBody();
             if (err != null)
@@ -63,20 +74,37 @@ class ApplicationState {
         }
     }
 
+    fun getScheduleTasks(): ArrayList<Task> {
+        if (!loggedIn) throw Exception("User not loaded")
+
+        val tasks = ArrayList<Task>()
+        val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+
+        for (loc in user.locations) {
+            for (task in loc.tasks) {
+                if (task.isScheduled(today)) {
+                    tasks.add(task)
+                }
+            }
+        }
+
+        return tasks
+    }
+
     // Refreshes the user loaded with the api one
     fun refreshUser() {
-        if (user == null) throw Exception("User not loaded")
+        if (!loggedIn) throw Exception("User not loaded")
 
-        getUser(user!!.id)
+        getUser(user.id)
     }
 
     // Updates the user on the api with the current loaded user
     fun updateUser() {
-        if (user == null) throw Exception("User not loaded")
+        if (!loggedIn) throw Exception("User not loaded")
 
         val service = UserService.getInstance()
 
-        val resp = service.updateUser(user!!.id, user!!).execute()
+        val resp = service.updateUser(user.id, user).execute()
 
         if (resp.code() != 200) {
             val err = resp.errorBody();
