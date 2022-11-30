@@ -40,7 +40,7 @@ public class UserController : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateUser(string id, User user)
+    public async Task<IActionResult> UpdateUser([FromRoute] string id, [FromBody] User user)
     {
         if (id != user.Id)
             return BadRequest();

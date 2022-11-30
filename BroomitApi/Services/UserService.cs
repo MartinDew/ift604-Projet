@@ -2,6 +2,7 @@
 using BroomitApi.Models;
 using User = BroomitModels.User;
 using Microsoft.Extensions.Options;
+using Task = System.Threading.Tasks.Task;
 
 namespace BroomitApi.Services;
 
@@ -40,12 +41,26 @@ public class UserService
 
     public async Task<User> CreateUserAsync(User user)
     {
+        // Encrypt password
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         await _usersCollection.InsertOneAsync(user);
         return user;
     }
 
     public async Task UpdateUserAsync(string id, User userIn)
     {
+        if (string.IsNullOrEmpty(userIn.Password))
+        {
+            // Use same encrypted password as before changes
+            User user = await GetUserAsync(userIn.Id);
+            userIn.Password = user.Password;
+        }
+        else
+        {
+            // Encrypt new password
+            userIn.Password = BCrypt.Net.BCrypt.HashPassword(userIn.Password);
+        }
+
         await _usersCollection.ReplaceOneAsync(user => user.Id == id, userIn);
     }
 
