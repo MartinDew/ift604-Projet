@@ -1,7 +1,7 @@
-﻿using BroomitApi.Models;
+﻿using MongoDB.Driver;
+using BroomitApi.Models;
 using User = BroomitModels.User;
 using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
 namespace BroomitApi.Services;
 
@@ -11,8 +11,8 @@ public class UserService
 
     public UserService(IOptions<BroomitDatabaseSettings> broomitDbSettings)
     {
-        var mongoClient = new MongoClient(broomitDbSettings.Value.ConnectionString);
-        var database = mongoClient.GetDatabase(broomitDbSettings.Value.DatabaseName);
+        MongoClient mongoClient = new(broomitDbSettings.Value.ConnectionString);
+        IMongoDatabase database = mongoClient.GetDatabase(broomitDbSettings.Value.DatabaseName);
 
         _usersCollection = database.GetCollection<User>(broomitDbSettings.Value.UsersCollectionName);
     }
@@ -24,7 +24,7 @@ public class UserService
 
     public async Task<string?>? LoginAsync(LoginRequest login)
     {
-        var user = await _usersCollection.Find(user => user.Username == login.Username).FirstOrDefaultAsync();
+        User? user = await _usersCollection.Find(user => user.Username == login.Username).FirstOrDefaultAsync();
         if (user == null) return null;
 
         if (user.Password == login.Password)
@@ -37,22 +37,21 @@ public class UserService
     {
         return await _usersCollection.Find(user => user.Id == id).FirstOrDefaultAsync();
     }
+
     public async Task<User> CreateUserAsync(User user)
     {
         await _usersCollection.InsertOneAsync(user);
         return user;
     }
 
-    // Update user with options
     public async Task UpdateUserAsync(string id, User userIn)
     {
         await _usersCollection.ReplaceOneAsync(user => user.Id == id, userIn);
     }
 
-    // Just Remove user
     public async Task<bool> RemoveUserAsync(string id)
     {
-        var r = await _usersCollection.DeleteOneAsync(user => user.Id == id);
-        return r.DeletedCount == 1;
+        DeleteResult result = await _usersCollection.DeleteOneAsync(user => user.Id == id);
+        return result.DeletedCount == 1;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace BroomitModels;
+
 public class Schedule
 {
     public enum ScheduleType
@@ -10,6 +11,7 @@ public class Schedule
 
     /// <summary>
     /// Initial scheduled date time
+    /// <para />
     /// Exception: if type == Weekly it should be the sunday of that week
     /// </summary>
     [JsonPropertyName("start_date_time")]
@@ -29,8 +31,11 @@ public class Schedule
 
     /// <summary>
     /// List of days of the week active when type == Weekly
-    /// length should be 0 if type is not Weekly else it should be between 1 and 7
+    /// <para />
+    /// Length should be 0 if type is not Weekly else it should be between 1 and 7
+    /// <para />
     /// value 0 => sunday 
+    /// <para />
     /// value 7 => saturday
     /// </summary>
     [JsonPropertyName("days")]
@@ -49,6 +54,10 @@ public class Schedule
     /// </summary>
     [JsonIgnore]
     public TimeOnly Time => TimeOnly.FromDateTime(StartDateTime);
+
+    /// <summary>
+    /// Gets the time as a string
+    /// </summary>
     [JsonIgnore]
     public string StringTime => Time.ToString();
 
@@ -58,11 +67,12 @@ public class Schedule
         ScheduleType.Weekly => isScheduledWeek(date),
         _ => false
     };
+
     private bool isScheduledWeek(DateOnly date)
     {
         int currentDayOfWeek = (int)date.DayOfWeek;
 
-        // first day of the current week
+        // First day of the current week
         int currentWeekNumber = date.DayNumber - currentDayOfWeek / 7;
         int startWeekNumber = Date.Day / 7;
 

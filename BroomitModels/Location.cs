@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace BroomitModels;
+
 public class Location
 {
     public struct Geolocation

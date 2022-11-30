@@ -1,6 +1,5 @@
-﻿using BroomitApi.Models;
+﻿using BroomitModels;
 using BroomitApi.Services;
-using BroomitModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BroomitApi.Controllers;
@@ -11,15 +10,14 @@ public class UserController : ControllerBase
 {
     private readonly UserService _userService;
     
-    public UserController(UserService userService) => 
-        _userService = userService;
+    public UserController(UserService userService) => _userService = userService;
     
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<User>> GetUser([FromRoute] string id)
     {
-        var result = await _userService.GetUserAsync(id);
+        User? result = await _userService.GetUserAsync(id);
         if (result is null)
             return NotFound();
         return result;
@@ -35,7 +33,7 @@ public class UserController : ControllerBase
             return BadRequest();
 
         user.Locations = new List<Location>();
-        var result = await _userService.CreateUserAsync(user);
+        User? result = await _userService.CreateUserAsync(user);
         return result.Id;
     }
 
@@ -55,7 +53,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteUser(string id)
     {
-        var result = await _userService.RemoveUserAsync(id);
+        bool result = await _userService.RemoveUserAsync(id);
         if (result is false)
             return NotFound();
         return NoContent();

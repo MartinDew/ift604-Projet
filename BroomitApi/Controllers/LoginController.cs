@@ -10,8 +10,7 @@ public class LoginController : Controller
 {
     private readonly UserService _userService;
 
-    public LoginController(UserService userService) =>
-        _userService = userService;
+    public LoginController(UserService userService) => _userService = userService;
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -21,7 +20,7 @@ public class LoginController : Controller
         if (loginRequest.Username?.Length == 0 || loginRequest.Password?.Length == 0)
             return BadRequest();
 
-        var guid = await _userService.LoginAsync(loginRequest);
+        string? guid = await _userService.LoginAsync(loginRequest);
         if (guid is null)
             return BadRequest();
 

@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace BroomitModels;
 
@@ -26,14 +23,15 @@ public class Task
     public string Notes { get; set; } = "";
 
     /// <summary>
-    /// The Schedule of the task
+    /// Schedule of the task
+    /// <para />
     /// i.e. when it is scheduled for
     /// </summary>
     [JsonPropertyName("schedule")]
     public Schedule? Schedule { get; set; }
 
     /// <summary>
-    /// Should the user be notified when task is due
+    /// Should the user be notified when task is due?
     /// </summary>
     [JsonPropertyName("notify_on_due")]
     public bool NotifyOnDue { get; set; } = false;
