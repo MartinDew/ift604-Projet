@@ -3,7 +3,6 @@ using BroomitApi.Models;
 using User = BroomitModels.User;
 using Microsoft.Extensions.Options;
 using Task = System.Threading.Tasks.Task;
-using Microsoft.AspNetCore.Identity;
 
 namespace BroomitApi.Services;
 
