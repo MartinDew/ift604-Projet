@@ -14,9 +14,6 @@ import projet.ift604.broomitclient.MainActivity
 import projet.ift604.broomitclient.R
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.databinding.ActivityLoginBinding
-import projet.ift604.broomitclient.toHex
-import java.nio.charset.StandardCharsets
-import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -66,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 if (state.loggedIn) {
                     val myIntent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(myIntent)
+                    // TODO: Prevent 'Back' button to Login from MainActivity (?)
                 }
             }
         }

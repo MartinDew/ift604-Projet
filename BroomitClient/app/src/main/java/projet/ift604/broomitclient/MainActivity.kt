@@ -71,6 +71,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.nav_disconnect -> {
+                val state = ApplicationState.getInstance()
+                state.logout()
+                finish() // Quit MainActivity, go back to Login prompt.
+            }
             R.id.nav_settings -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.nav_settings)

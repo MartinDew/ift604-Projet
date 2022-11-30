@@ -56,6 +56,11 @@ class ApplicationState {
         }
     }
 
+    fun logout() {
+        loggedIn = false;
+        _user = null;
+    }
+
     fun create(createReq: UserService.CreateRequest) {
         val service = UserService.getInstance()
 

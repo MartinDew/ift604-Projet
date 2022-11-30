@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit
 
 interface UserService {
 
-    // Password will be a SHA256 of the given password
     @Serializable
     class LoginRequest(val username: String, val password: String)
 
