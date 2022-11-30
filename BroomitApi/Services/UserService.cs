@@ -3,6 +3,7 @@ using BroomitApi.Models;
 using User = BroomitModels.User;
 using Microsoft.Extensions.Options;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.AspNetCore.Identity;
 
 namespace BroomitApi.Services;
 
@@ -28,7 +29,8 @@ public class UserService
         User? user = await _usersCollection.Find(user => user.Username == login.Username).FirstOrDefaultAsync();
         if (user == null) return null;
 
-        if (user.Password == login.Password)
+        // Verify password using bcrypt against the hash stored in User
+        if (BCrypt.Net.BCrypt.Verify(login.Password, user.Password))
             return user.Id;
 
         return null;
