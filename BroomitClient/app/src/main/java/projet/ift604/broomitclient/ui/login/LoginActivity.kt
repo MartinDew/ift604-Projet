@@ -43,9 +43,6 @@ class LoginActivity : AppCompatActivity() {
             val usr = binding.username.text.toString()
             val pass = binding.password.text.toString()
 
-            val digest = MessageDigest.getInstance("SHA-256")
-            val hash = digest.digest(pass.toByteArray(StandardCharsets.UTF_8)).toHex()
-
             val handler = CoroutineExceptionHandler { _, err -> err.printStackTrace() }
             lifecycleScope.launch(Dispatchers.IO + handler) {
                 val state = ApplicationState.getInstance()
@@ -53,9 +50,9 @@ class LoginActivity : AppCompatActivity() {
                     if (binding.toggleLoginType.isChecked) {
                         val email = binding.email.text.toString()
 
-                        state.create(UserService.CreateRequest(usr, hash, email))
+                        state.create(UserService.CreateRequest(usr, pass, email))
                     } else {
-                        state.login(UserService.LoginRequest(usr, hash))
+                        state.login(UserService.LoginRequest(usr, pass))
                     }
                 } catch(e: ApplicationState.HttpException) {
                     //@TODO: show error message on UI
