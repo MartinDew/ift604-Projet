@@ -32,7 +32,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="prompt_username">Nom d\'utilisateur</string>
-    <string name="toggle_connexion">Connexion</string>
-    <string name="toggle_creer_compte">Créer un compte</string>
-    <string name="no_tasks_today">Aucune tâches aujourd\'hui</string>
+    <string name="toggle_connexion">Vous avez un compte? Cliquer ici.</string>
+    <string name="toggle_creer_compte">Vous n\'avez pas de compte? Cliquer ici.</string>
+    <string name="no_tasks_today">Aucune tâche aujourd\'hui</string>
 </resources>

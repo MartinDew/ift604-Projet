@@ -8,8 +8,8 @@
 
     <ToggleButton
         android:id="@+id/toggleLoginType"
-        android:textOff="@string/toggle_connexion"
-        android:textOn="@string/toggle_creer_compte"
+        android:textOff="@string/toggle_creer_compte"
+        android:textOn="@string/toggle_connexion"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/username"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ToggleButton>
-
 
     <EditText
         android:id="@+id/username"
@@ -81,4 +80,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
         app:layout_constraintVertical_bias="0.2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
