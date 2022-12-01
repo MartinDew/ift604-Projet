@@ -57,12 +57,12 @@ class ProfileFragment : Fragment() {
                         var userIn = User(user.id, username, newPassword, email, user.locations)
 
                         state.updateUser(userIn)
-                    } catch (e: Exception) {
+                    } catch (e: ApplicationState.HttpException) {
                         // TODO: show error message on UI
                         activity?.runOnUiThread {
                             Toast.makeText(
                                 activity?.applicationContext,
-                                "ERROR: " + e.message,
+                                "ERROR: " + e.code,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
