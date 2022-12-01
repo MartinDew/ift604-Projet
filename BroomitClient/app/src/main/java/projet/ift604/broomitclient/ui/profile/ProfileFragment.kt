@@ -7,7 +7,9 @@ import android.widget.TextView
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.databinding.FragmentProfileBinding
+import projet.ift604.broomitclient.models.User
 
 class ProfileFragment : Fragment() {
 
@@ -16,6 +18,8 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private var user: User = ApplicationState.getInstance().user
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,8 +33,10 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textSettings
+        // TODO: Modifier l'affichage des informations
+        // TODO: Pouvoir modifier son mot de passe
         settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            textView.text = "Nom d'utilisateur: ${user.username}\nCourriel: ${user.email}"
         }
         return root
     }

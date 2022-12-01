@@ -1,14 +1,14 @@
 package projet.ift604.broomitclient.ui.today
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import projet.ift604.broomitclient.ApplicationState
-import projet.ift604.broomitclient.databinding.FragmentTodayBinding
 import projet.ift604.broomitclient.models.Task
+import projet.ift604.broomitclient.ApplicationState
+import androidx.recyclerview.widget.LinearLayoutManager
+import projet.ift604.broomitclient.databinding.FragmentTodayBinding
 
 class TodayFragment : Fragment() {
 
@@ -18,7 +18,7 @@ class TodayFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val scheduledTasks: ArrayList<Task> = ArrayList<Task>()
+    private val scheduledTasks: ArrayList<Task> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
