@@ -45,7 +45,7 @@ public class UserController : ControllerBase
         if (id != user.Id)
             return BadRequest();
         await _userService.UpdateUserAsync(id, user);
-        return Ok();
+        return NoContent();
     }
     
     [HttpDelete("{id}")]

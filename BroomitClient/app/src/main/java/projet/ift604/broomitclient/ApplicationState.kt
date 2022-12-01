@@ -37,6 +37,22 @@ class ApplicationState {
         }
     }
 
+    fun updateUser(user: User) {
+        val service = UserService.getInstance()
+
+        val resp = service.updateUser(user.id, user).execute()
+
+        if (resp.code() == 204) {
+            // Replace with new data
+            _user = user
+        } else {
+            val err = resp.errorBody();
+            if (err != null)
+                throw HttpException(resp.code(), err.string())
+            throw HttpException(resp.code())
+        }
+    }
+
     // This logs in the server and fetches the user
     fun login(loginReq: UserService.LoginRequest) {
         val service = UserService.getInstance()

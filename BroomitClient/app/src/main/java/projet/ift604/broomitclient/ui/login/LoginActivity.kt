@@ -52,8 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         state.login(UserService.LoginRequest(usr, pass))
                     }
                 } catch(e: ApplicationState.HttpException) {
-                    //@TODO: show error message on UI
-                    // handle error in UI
+                    // TODO: show error message on UI
                     runOnUiThread {
                         Toast.makeText(applicationContext, "ERROR: " + e.code, Toast.LENGTH_LONG)
                             .show()
