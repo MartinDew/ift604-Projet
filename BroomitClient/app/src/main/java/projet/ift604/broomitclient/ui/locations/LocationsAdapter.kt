@@ -1,12 +1,12 @@
-package projet.ift604.broomitclient.ui.slideshow
+package projet.ift604.broomitclient.ui.locations
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import android.view.LayoutInflater
 import projet.ift604.broomitclient.R
 import projet.ift604.broomitclient.models.Task
+import androidx.recyclerview.widget.RecyclerView
 
 class LocationAdapter(private val tasks: ArrayList<Task>) : RecyclerView.Adapter<LocationAdapter.ViewHolder>() {
 

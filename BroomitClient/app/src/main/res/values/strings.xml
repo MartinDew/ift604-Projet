@@ -8,8 +8,13 @@
 
     <string name="menu_transform">Transform</string>
     <string name="menu_today">Aujourd\'hui</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_locations">Locations</string>
+
+
+    <!-- Three-dots menu (overflow.xml) -->
+    <string name="menu_profile">Profil</string>
     <string name="menu_settings">Paramètres</string>
+    <string name="action_disconnect">Se déconnecter</string>
 
     <string name="lorem_ipsum_title">Lorem Ipsum"</string>
     <string name="lorem_ipsum">Lorem Ipsum is simply placeholder text of the printing and
@@ -28,7 +33,6 @@
     <string name="prompt_email">Courriel</string>
     <string name="action_sign_in">Se connecter</string>
     <string name="action_register">Créer un compte</string>
-    <string name="action_disconnect">Se déconnecter</string>
     <string name="welcome">"Welcome!"</string> <!-- TODO: not used right now... -->
     <string name="invalid_username">Not a valid username</string> <!-- TODO: not used right now... -->
     <string name="invalid_password">Password must be >5 characters</string> <!-- TODO: not used right now... -->

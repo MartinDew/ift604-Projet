@@ -18,14 +18,20 @@
         tools:layout="@layout/fragment_today" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="projet.ift604.broomitclient.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_locations"
+        android:name="projet.ift604.broomitclient.ui.locations.LocationsFragment"
+        android:label="@string/menu_locations"
+        tools:layout="@layout/fragment_locations" />
 
     <fragment
         android:id="@+id/nav_settings"
         android:name="projet.ift604.broomitclient.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="projet.ift604.broomitclient.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

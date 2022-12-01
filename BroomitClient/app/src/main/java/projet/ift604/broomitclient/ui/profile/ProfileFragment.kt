@@ -1,4 +1,4 @@
-package projet.ift604.broomitclient.ui.settings
+package projet.ift604.broomitclient.ui.profile
 
 import android.os.Bundle
 import android.view.View
@@ -7,11 +7,11 @@ import android.widget.TextView
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import projet.ift604.broomitclient.databinding.FragmentSettingsBinding
+import projet.ift604.broomitclient.databinding.FragmentProfileBinding
 
-class SettingsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentSettingsBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,9 +23,9 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val settingsViewModel =
-            ViewModelProvider(this).get(SettingsViewModel::class.java)
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textSettings

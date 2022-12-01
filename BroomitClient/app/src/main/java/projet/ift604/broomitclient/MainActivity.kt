@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView?.let {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings
+                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_locations, R.id.nav_settings
                 ),
                 binding.drawerLayout
             )
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.contentMain.bottomNavView?.let {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow
+                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_locations
                 )
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
@@ -71,14 +71,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_disconnect -> {
-                val state = ApplicationState.getInstance()
-                state.logout()
-                finish() // Quit MainActivity, go back to Login prompt.
+            R.id.nav_profile -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                navController.navigate(R.id.nav_profile)
             }
             R.id.nav_settings -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.nav_settings)
+            }
+            R.id.nav_disconnect -> {
+                val state = ApplicationState.getInstance()
+                state.logout()
+                finish() // Quit MainActivity, go back to Login prompt.
             }
         }
         return super.onOptionsItemSelected(item)

@@ -1,18 +1,17 @@
-package projet.ift604.broomitclient.ui.slideshow
+package projet.ift604.broomitclient.ui.locations
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import projet.ift604.broomitclient.databinding.FragmentLocationsBinding
 
-class LocationFragment : Fragment() {
+class LocationsFragment : Fragment() {
 
     private var _binding: FragmentLocationsBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

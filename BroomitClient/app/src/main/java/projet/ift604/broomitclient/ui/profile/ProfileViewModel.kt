@@ -1,13 +1,13 @@
-package projet.ift604.broomitclient.ui.settings
+package projet.ift604.broomitclient.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
-class SettingsViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Page des paramètres."
+        value = "Page du profil de l'utilisateur."
     }
     val text: LiveData<String> = _text
 }

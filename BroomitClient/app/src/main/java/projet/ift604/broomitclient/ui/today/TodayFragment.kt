@@ -1,14 +1,10 @@
 package projet.ift604.broomitclient.ui.today
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.databinding.FragmentTodayBinding
