@@ -6,7 +6,8 @@ services:
             dockerfile: ./BroomitApi/Dockerfile
             context: .
         ports:
-            - "3600:80"
+            - "5150:80"
+            
     db:
     # use mongodb
         image: mongo
