@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_transform" />
 
     <fragment
-        android:id="@+id/nav_reflow"
+        android:id="@+id/nav_today"
         android:name="projet.ift604.broomitclient.ui.today.TodayFragment"
         android:label="@string/menu_today"
         tools:layout="@layout/fragment_today" />

@@ -5,19 +5,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.view.LayoutInflater
 import projet.ift604.broomitclient.R
+import projet.ift604.broomitclient.models.Location
 import projet.ift604.broomitclient.models.Task
 import androidx.recyclerview.widget.RecyclerView
 
-class LocationAdapter(private val tasks: ArrayList<Task>) : RecyclerView.Adapter<LocationAdapter.ViewHolder>() {
+class LocationsAdapter(private val tasks: ArrayList<Location>) : RecyclerView.Adapter<LocationsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.task_name)
+        val name: TextView = itemView.findViewById(R.id.location_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_task, parent, false)
+            .inflate(R.layout.item_location, parent, false)
 
         return ViewHolder(view)
     }
@@ -25,8 +26,8 @@ class LocationAdapter(private val tasks: ArrayList<Task>) : RecyclerView.Adapter
     override fun getItemCount(): Int = tasks.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val task = tasks[position]
+        val loc = tasks[position]
 
-        holder.name.text = task.name
+        holder.name.text = loc.name
     }
 }

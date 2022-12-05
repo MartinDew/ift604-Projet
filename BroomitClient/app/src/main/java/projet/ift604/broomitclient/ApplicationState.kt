@@ -10,6 +10,7 @@ import kotlinx.datetime.toLocalDateTime
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.models.Task
 import projet.ift604.broomitclient.models.User
+import retrofit2.Call
 import java.lang.Exception
 
 class ApplicationState {
@@ -17,59 +18,42 @@ class ApplicationState {
 
     var loggedIn: Boolean = false
 
-    var userMutex: Mutex = Mutex()
     val user get() = _user!!
     var _user: User? = null
 
+    @Throws(HttpException::class)
+    fun <T> callAPI(call: Call<T>): T? {
+        val resp = call.execute()
+        val body = resp.body()
+
+        if (resp.code() in 200..299) {
+            if (body != null)
+                return body
+        } else {
+            val err = resp.errorBody()
+            if (err != null)
+                throw HttpException(resp.code(), err.string())
+            throw HttpException(resp.code())
+        }
+        return null
+    }
+
+    @Throws(HttpException::class)
     fun getUser(userId: String) {
         val service = UserService.getInstance()
 
-        val resp = service.getUser(userId).execute()
-        val body = resp.body()
-
-        if (resp.code() == 200 && body != null) {
-            _user = body
-        } else {
-            val err = resp.errorBody();
-            if (err != null)
-                throw HttpException(resp.code(), err.string())
-            throw HttpException(resp.code())
-        }
+        _user = callAPI(service.getUser(userId))
     }
 
-    fun updateUser(user: User) {
-        val service = UserService.getInstance()
-
-        val resp = service.updateUser(user.id, user).execute()
-
-        if (resp.code() == 204) {
-            // Replace with new data
-            _user = user
-        } else {
-            val err = resp.errorBody();
-            if (err != null)
-                throw HttpException(resp.code(), err.string())
-            throw HttpException(resp.code())
-        }
-    }
 
     // This logs in the server and fetches the user
+    @Throws(HttpException::class)
     fun login(loginReq: UserService.LoginRequest) {
         val service = UserService.getInstance()
+        val userId = callAPI(service.login(loginReq))
 
-        // fetch user with username and password
-        val resp = service.login(loginReq).execute()
-        val body = resp.body()
-
-        if (resp.code() == 200 && body != null) {
-            getUser(body)
-            loggedIn = true
-        } else {
-            val err = resp.errorBody();
-            if (err != null)
-                throw HttpException(resp.code(), err.string())
-            throw HttpException(resp.code())
-        }
+        getUser(userId!!)
+        loggedIn = true
     }
 
     fun logout() {
@@ -77,22 +61,15 @@ class ApplicationState {
         _user = null;
     }
 
+    @Throws(HttpException::class)
     fun create(createReq: UserService.CreateRequest) {
         val service = UserService.getInstance()
 
         // fetch user with username and password
-        val resp = service.create(createReq).execute()
-        val body = resp.body()
+        val userId = callAPI(service.create(createReq))
 
-        if (resp.code() == 200 && body != null) {
-            getUser(body)
-            loggedIn = true
-        } else {
-            val err = resp.errorBody();
-            if (err != null)
-                throw HttpException(resp.code(), err.string())
-            throw HttpException(resp.code())
-        }
+        getUser(userId!!)
+        loggedIn = true
     }
 
     fun getScheduleTasks(): ArrayList<Task> {
@@ -113,6 +90,7 @@ class ApplicationState {
     }
 
     // Refreshes the user loaded with the api one
+    @Throws(HttpException::class)
     fun refreshUser() {
         if (!loggedIn) throw Exception("User not loaded")
 
@@ -120,19 +98,13 @@ class ApplicationState {
     }
 
     // Updates the user on the api with the current loaded user
+    @Throws(HttpException::class)
     fun updateUser() {
         if (!loggedIn) throw Exception("User not loaded")
 
         val service = UserService.getInstance()
 
-        val resp = service.updateUser(user.id, user).execute()
-
-        if (resp.code() != 200) {
-            val err = resp.errorBody();
-            if (err != null)
-                throw HttpException(resp.code(), err.string())
-            throw HttpException(resp.code())
-        }
+        callAPI(service.updateUser(user.id, user))
     }
 
     companion object {

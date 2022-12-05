@@ -14,7 +14,7 @@ public class Location
     }
 
     [JsonPropertyName("id")]
-    public string? Id { get; set; } = Guid.NewGuid().ToString();
+    public string? Id { get; set; }
 
     [JsonPropertyName("name")]
     public string? Name { get; set; }

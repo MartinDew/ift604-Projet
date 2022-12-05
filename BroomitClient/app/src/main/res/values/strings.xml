@@ -8,13 +8,12 @@
 
     <string name="menu_transform">Transform</string>
     <string name="menu_today">Aujourd\'hui</string>
-    <string name="menu_locations">Locations</string>
-
 
     <!-- Three-dots menu (overflow.xml) -->
     <string name="menu_profile">Profil</string>
     <string name="menu_settings">Paramètres</string>
     <string name="action_disconnect">Se déconnecter</string>
+    <string name="menu_locations">Domiciles</string>
 
     <string name="lorem_ipsum_title">Lorem Ipsum"</string>
     <string name="lorem_ipsum">Lorem Ipsum is simply placeholder text of the printing and

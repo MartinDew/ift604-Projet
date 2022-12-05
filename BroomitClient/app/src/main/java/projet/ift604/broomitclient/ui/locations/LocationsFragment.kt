@@ -3,8 +3,9 @@ package projet.ift604.broomitclient.ui.locations
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.databinding.FragmentLocationsBinding
 
 class LocationsFragment : Fragment() {
@@ -21,6 +22,11 @@ class LocationsFragment : Fragment() {
     ): View {
         _binding = FragmentLocationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val locations = ApplicationState.getInstance().user.locations
+
+        binding.locationsRecycler.layoutManager = LinearLayoutManager(context)
+        binding.locationsRecycler.adapter = LocationsAdapter(locations)
 
         return root
     }
