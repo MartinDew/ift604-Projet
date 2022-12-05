@@ -49,14 +49,14 @@ class ProfileFragment : Fragment() {
             val email: String = binding.email.text.toString().trim()
             val newPassword: String = binding.newPassword.text.toString().trim()
             val confirmPassword: String = binding.confirmPassword.text.toString().trim()
+
             if (validateFields(username, email, newPassword, confirmPassword)) {
                 val handler = CoroutineExceptionHandler { _, err -> err.printStackTrace() }
                 lifecycleScope.launch(Dispatchers.IO + handler) {
                     val state = ApplicationState.getInstance()
                     try {
-                        var userIn = User(user.id, username, newPassword, email, user.locations)
-
-                        state.updateUser(userIn)
+                        state.user = User(user.id, username, newPassword, email, user.locations)
+                        state.updateUser()
                     } catch (e: ApplicationState.HttpException) {
                         // TODO: show error message on UI
                         activity?.runOnUiThread {

@@ -49,4 +49,5 @@
     <string name="missing_at_email">Le courriel doit contenir une arobase (@)</string>
     <string name="passwords_do_not_match">Les mots de passe ne correspondent pas</string>
     <string name="save_changes_success">Les modifications ont été enregistrées avec succès</string>
+    <string name="add_location">Ajouter un domicile</string>
 </resources>

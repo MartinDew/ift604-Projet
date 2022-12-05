@@ -18,7 +18,10 @@ class ApplicationState {
 
     var loggedIn: Boolean = false
 
-    val user get() = _user!!
+    var user: User
+        get() = _user!!
+        set(value: User) { _user = value }
+
     var _user: User? = null
 
     @Throws(HttpException::class)
