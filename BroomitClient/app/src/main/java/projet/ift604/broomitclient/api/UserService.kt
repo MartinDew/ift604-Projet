@@ -4,12 +4,14 @@ import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import projet.ift604.broomitclient.API_URL
+import projet.ift604.broomitclient.models.Location
 import projet.ift604.broomitclient.models.User
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -37,6 +39,19 @@ interface UserService {
 
     @PUT("user/{userId}")
     fun updateUser(@Path("userId") userId: String, @Body user: User): Call<ResponseBody>
+
+    // Code for the locations
+    @GET("location/{locationId}")
+    fun getLocation(@Path("locationId") locationId: String): Call<Location>
+
+    @POST("location")
+    fun createLocation(@Body location: Location): Call<String>
+
+    @PUT("location/{locationId}")
+    fun updateLocation(@Path("locationId") locationId: String, @Body location: Location): Call<Unit>
+
+    @DELETE("location/{locationId}")
+    fun deleteLocation(@Path("locationId") locationId: String): Call<Unit>
 
     companion object {
         fun getInstance(): UserService {
