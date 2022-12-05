@@ -12,6 +12,10 @@ public class UserController : ControllerBase
     
     public UserController(UserService userService) => _userService = userService;
     
+    // Get that returns a test
+    [HttpGet]
+    public ActionResult<string> Get() => Ok("Hello World!");
+    
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -34,6 +38,7 @@ public class UserController : ControllerBase
 
         user.Locations = new List<Location>();
         User? result = await _userService.CreateUserAsync(user);
+        // return result?.Id ?? new HttpResponseMessage(System.Net.HttpStatusCode.NotFound).ToString();
         return result.Id;
     }
 

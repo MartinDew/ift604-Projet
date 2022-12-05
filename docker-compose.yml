@@ -7,6 +7,10 @@ services:
             context: .
         ports:
             - "5150:80"
+        environment:
+            "BroomitDatabase:ConnectionString": "mongodb://db"
+            ASPNETCORE_URLS: "http://*:80"
+            "useSSL": "false"
             
     db:
     # use mongodb
