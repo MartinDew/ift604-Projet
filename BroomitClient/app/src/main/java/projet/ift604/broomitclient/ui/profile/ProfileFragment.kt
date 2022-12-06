@@ -57,6 +57,10 @@ class ProfileFragment : Fragment() {
                     try {
                         state.user = User(user.id, username, newPassword, email, user.locations)
                         state.updateUser()
+
+                        // Update first letter from username in 'circleView'
+                        val circleView: TextView = binding.title
+                        circleView.text = user.username[0].uppercaseChar().toString()
                     } catch (e: ApplicationState.HttpException) {
                         // TODO: show error message on UI
                         activity?.runOnUiThread {
