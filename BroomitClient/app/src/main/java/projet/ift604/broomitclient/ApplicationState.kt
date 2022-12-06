@@ -16,11 +16,11 @@ import java.lang.Exception
 class ApplicationState {
     class HttpException(val code: Int, val msg: String = "") : Throwable()
 
-    var loggedIn: Boolean = false
+    val loggedIn: Boolean get() = _user != null
 
     var user: User
         get() = _user!!
-        set(value: User) { _user = value }
+        set(value) { _user = value }
 
     var _user: User? = null
 
@@ -56,11 +56,9 @@ class ApplicationState {
         val userId = callAPI(service.login(loginReq))
 
         getUser(userId!!)
-        loggedIn = true
     }
 
     fun logout() {
-        loggedIn = false;
         _user = null;
     }
 
@@ -72,7 +70,6 @@ class ApplicationState {
         val userId = callAPI(service.create(createReq))
 
         getUser(userId!!)
-        loggedIn = true
     }
 
     fun getScheduleTasks(): ArrayList<Task> {
