@@ -15,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import projet.ift604.broomitclient.models.User
 import projet.ift604.broomitclient.ApplicationState
-import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -25,7 +24,7 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private var user: User = ApplicationState.getInstance().user
+    private var user: User = ApplicationState.instance.user
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +59,7 @@ class ProfileFragment : Fragment() {
 
                         // Update first letter from username in 'circleView'
                         val circleView: TextView = binding.title
-                        circleView.text = user.username[0].uppercaseChar().toString()
+                        circleView.text = username[0].uppercaseChar().toString()
                     } catch (e: ApplicationState.HttpException) {
                         // TODO: show error message on UI
                         activity?.runOnUiThread {
