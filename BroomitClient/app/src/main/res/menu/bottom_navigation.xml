@@ -10,11 +10,11 @@
             android:title="@string/menu_transform" />
         <item
             android:id="@+id/nav_today"
-            android:icon="@drawable/ic_gallery_black_24dp"
+            android:icon="@drawable/ic_calendar_today_black_24dp"
             android:title="@string/menu_today" />
         <item
             android:id="@+id/nav_locations"
-            android:icon="@drawable/ic_slideshow_black_24dp"
+            android:icon="@drawable/ic_cottage_black_24dp"
             android:title="@string/menu_locations" />
     </group>
 </menu>
