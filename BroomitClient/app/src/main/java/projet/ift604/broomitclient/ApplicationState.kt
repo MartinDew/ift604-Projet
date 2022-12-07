@@ -1,5 +1,6 @@
 package projet.ift604.broomitclient
 
+import android.location.Location
 import android.telephony.TelephonyCallback.CellLocationListener
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -15,6 +16,9 @@ import java.lang.Exception
 
 class ApplicationState {
     class HttpException(val code: Int, val msg: String = "") : Throwable()
+
+    // use with lock as the background service is writing to it
+    var currentLocation: Location = Location(null)
 
     val loggedIn: Boolean get() = _user != null
 
