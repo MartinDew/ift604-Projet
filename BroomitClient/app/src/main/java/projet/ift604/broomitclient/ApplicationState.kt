@@ -13,12 +13,11 @@ import projet.ift604.broomitclient.models.Task
 import projet.ift604.broomitclient.models.User
 import retrofit2.Call
 import java.lang.Exception
+import java.lang.Math.pow
+import java.lang.Math.sqrt
 
 class ApplicationState {
     class HttpException(val code: Int, val msg: String = "") : Throwable()
-
-    // use with lock as the background service is writing to it
-    var currentLocation: Location = Location(null)
 
     val loggedIn: Boolean get() = _user != null
 
@@ -91,6 +90,23 @@ class ApplicationState {
         }
 
         return tasks
+    }
+
+    fun getLocationInProximity(loc: Location, range: Double): ArrayList<projet.ift604.broomitclient.models.Location> {
+        if (!loggedIn) throw Exception("User not loaded")
+
+        val locs = ArrayList<projet.ift604.broomitclient.models.Location>()
+
+        user.locations.forEach {
+
+            val LocLong = it.position.longitude
+            val LocLat = it.position.latitude
+
+            if (sqrt(pow((LocLong - loc.longitude), 2.0) + pow(LocLat - loc.latitude, 2.0)) < range)
+                locs.add(it)
+        }
+
+        return locs
     }
 
     // Refreshes the user loaded with the api one

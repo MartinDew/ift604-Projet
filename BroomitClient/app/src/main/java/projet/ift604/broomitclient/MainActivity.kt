@@ -1,11 +1,17 @@
 package projet.ift604.broomitclient
 
 import android.Manifest
+import android.app.Service
+import android.content.ComponentName
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.IBinder
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +31,28 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private val obs: LocationBGService.IObserver = object : LocationBGService.IObserver {
+        override fun onLocationUpdate(loc: Location) {
+            // HANDLE LOCATION UPDATES
+
+            val locList = ApplicationState.instance.getLocationInProximity(loc, 0.1)
+
+            runOnUiThread {
+                Toast.makeText(applicationContext, "${locList.size} POS: ${loc.longitude}, ${loc.latitude}", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            val binder = service as LocationBGService.LocationServiceBinder
+            binder.service.subscribe(obs)
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+        }
+    }
+
     fun requestLocationPerms() {
         val serviceIntent = Intent(this, LocationBGService::class.java)
 
@@ -35,10 +63,12 @@ class MainActivity : AppCompatActivity() {
                 perm.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                     // precise location granted
                     startService(serviceIntent)
+                    bindService(serviceIntent, connection, Service.BIND_AUTO_CREATE)
                 }
                 perm.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                     // coars location granted
                     startService(serviceIntent)
+                    bindService(serviceIntent, connection, Service.BIND_AUTO_CREATE)
                 } else -> {
                     // no location granted
                 }
@@ -54,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             ))
         } else {
             startService(serviceIntent)
+            bindService(serviceIntent, connection, Service.BIND_AUTO_CREATE)
         }
     }
 

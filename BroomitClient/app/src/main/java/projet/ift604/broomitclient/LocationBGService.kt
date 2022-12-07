@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
@@ -25,14 +26,34 @@ import java.util.concurrent.TimeUnit
 class LocationBGService : Service() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val locCallback = LocCallback()
+    private lateinit var locCallback: LocationCallback
 
-    class LocCallback : LocationCallback() {
+    interface IObserver {
+        fun onLocationUpdate(loc: Location)
+    }
+
+    val subs = ArrayList<IObserver>()
+
+    fun subscribe(obs: IObserver) {
+        subs.add(obs);
+    }
+
+    fun unsubscribe(obs: IObserver) {
+        subs.remove(obs);
+    }
+
+    fun sendAll(loc: Location) {
+        subs.forEach {
+            it.onLocationUpdate(loc)
+        }
+    }
+
+    class LocationServiceBinder(val service: LocationBGService) : Binder();
+
+    class LocCallback(val service: LocationBGService) : LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
             super.onLocationResult(p0)
-            synchronized(ApplicationState.instance.currentLocation) {
-                ApplicationState.instance.currentLocation = p0.lastLocation
-            }
+            service.sendAll(p0.lastLocation);
         }
     }
 
@@ -46,6 +67,8 @@ class LocationBGService : Service() {
         if (fine == PackageManager.PERMISSION_GRANTED &&
             coarse == PackageManager.PERMISSION_GRANTED
         ) {
+            locCallback = LocCallback(this)
+
             val locationRequest = LocationRequest.create().apply {
                 interval = TimeUnit.SECONDS.toMillis(5)
                 fastestInterval = TimeUnit.SECONDS.toMillis(1)
@@ -63,7 +86,6 @@ class LocationBGService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-
-        return null
+        return LocationServiceBinder(this)
     }
 }
