@@ -50,4 +50,10 @@
     <string name="passwords_do_not_match">Les mots de passe ne correspondent pas</string>
     <string name="save_changes_success">Les modifications ont été enregistrées avec succès</string>
     <string name="add_location">Ajouter un domicile</string>
+    <string name="create_location_title">Création d\'un domicile</string>
+    <string name="submit">soumettre</string>
+    <string name="prompt_location_name">Nom du domicile</string>
+    <string name="prompt_owner_phone_number">Numero de téléphone du proprétaire</string>
+    <string name="prompt_find_location">Trouver le domicile</string>
+    <string name="label_notes">notes</string>
 </resources>

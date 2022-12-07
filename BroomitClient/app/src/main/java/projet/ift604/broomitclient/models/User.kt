@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class User(
-    val id: String,
-    val username: String,
-    val password: String,
-    val email: String,
-    val locations: ArrayList<Location>
+    var id: String,
+    var username: String,
+    var password: String,
+    var email: String,
+    var locations: ArrayList<Location>
 ) {
 }

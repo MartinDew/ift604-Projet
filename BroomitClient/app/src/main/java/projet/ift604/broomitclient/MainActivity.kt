@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.nav_settings)
             }
             R.id.nav_disconnect -> {
-                val state = ApplicationState.getInstance()
+                val state = ApplicationState.instance
                 state.logout()
                 finish() // Quit MainActivity, go back to Login prompt.
             }

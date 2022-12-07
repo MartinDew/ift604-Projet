@@ -4,7 +4,7 @@ namespace BroomitModels;
 
 public class Location
 {
-    public struct Geolocation
+    public class Geolocation
     {
         [JsonPropertyName("latitude")]
         public double Latitude { get; set; }
@@ -13,8 +13,8 @@ public class Location
         public double Longitude { get; set; }
     }
 
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
+    //[JsonPropertyName("id")]
+    //public string? Id { get; set; }
 
     [JsonPropertyName("name")]
     public string? Name { get; set; }

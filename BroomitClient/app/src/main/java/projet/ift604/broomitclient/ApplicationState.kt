@@ -59,7 +59,7 @@ class ApplicationState {
     }
 
     fun logout() {
-        _user = null;
+        _user = null
     }
 
     @Throws(HttpException::class)
@@ -99,22 +99,26 @@ class ApplicationState {
 
     // Updates the user on the api with the current loaded user
     @Throws(HttpException::class)
-    fun updateUser() {
+    fun updateUser(passwordModified: Boolean = false) {
         if (!loggedIn) throw Exception("User not loaded")
 
         val service = UserService.getInstance()
+
+        if (!passwordModified)
+            user.password = ""
 
         callAPI(service.updateUser(user.id, user))
     }
 
     companion object {
-        private var instance: ApplicationState? = null
+        private var _instance: ApplicationState? = null
 
-        fun getInstance(): ApplicationState {
-            if (instance == null)
-                instance = ApplicationState()
+        val instance: ApplicationState
+            get() {
+            if (_instance == null)
+                _instance = ApplicationState()
 
-            return instance as ApplicationState
+            return _instance as ApplicationState
         }
     }
 }

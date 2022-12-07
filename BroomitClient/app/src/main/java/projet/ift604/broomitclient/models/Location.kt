@@ -4,13 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Location(
-    val id: String,
     val name: String,
     val address: String,
     val notes: String,
-    val ownerPhoneNumber: String,
-    val tasks: ArrayList<Task>,
-    val position: Geolocation
+    val owner_phone_number: String,
+    val position: Geolocation,
+    val tasks: ArrayList<Task> = ArrayList()
 ) {
     @Serializable
     class Geolocation(val latitude: Double, val longitude: Double);

@@ -1,5 +1,7 @@
 package projet.ift604.broomitclient.ui.locations
 
+import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.databinding.FragmentLocationsBinding
+
 
 class LocationsFragment : Fragment() {
 
@@ -24,12 +27,20 @@ class LocationsFragment : Fragment() {
         _binding = FragmentLocationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val locations = ApplicationState.getInstance().user.locations
-
         binding.locationsRecycler.layoutManager = LinearLayoutManager(context)
-        binding.locationsRecycler.adapter = LocationsAdapter(locations)
+
+        binding.addLocation.setOnClickListener {
+            val intent = Intent(context, LocationCreationActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val locations = ApplicationState.instance.user.locations
+        binding.locationsRecycler.adapter = LocationsAdapter(locations)
     }
 
     override fun onDestroyView() {

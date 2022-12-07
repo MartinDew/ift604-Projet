@@ -13,6 +13,9 @@ class LocationsAdapter(private val tasks: ArrayList<Location>) : RecyclerView.Ad
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.location_name)
+        val phone: TextView = itemView.findViewById(R.id.location_number)
+        val address: TextView = itemView.findViewById(R.id.location_address)
+        val notes: TextView = itemView.findViewById(R.id.location_notes)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,5 +32,8 @@ class LocationsAdapter(private val tasks: ArrayList<Location>) : RecyclerView.Ad
         val loc = tasks[position]
 
         holder.name.text = loc.name
+        holder.notes.text = loc.notes
+        holder.address.text = loc.address
+        holder.phone.text = loc.owner_phone_number
     }
 }

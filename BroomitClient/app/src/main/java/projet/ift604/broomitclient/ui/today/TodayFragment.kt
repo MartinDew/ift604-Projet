@@ -29,7 +29,7 @@ class TodayFragment : Fragment() {
         val root: View = binding.root
 
         scheduledTasks.clear()
-        scheduledTasks.addAll(ApplicationState.getInstance().getScheduleTasks())
+        scheduledTasks.addAll(ApplicationState.instance.getScheduleTasks())
 
         if (scheduledTasks.size == 0) {
             binding.noTasksText.visibility = View.VISIBLE

@@ -2,6 +2,7 @@ package projet.ift604.broomitclient.api
 
 import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import projet.ift604.broomitclient.API_URL
 import projet.ift604.broomitclient.models.User
 import retrofit2.Call
@@ -35,7 +36,7 @@ interface UserService {
     fun getUser(@Path("userId") userId: String): Call<User>
 
     @PUT("user/{userId}")
-    fun updateUser(@Path("userId") userId: String, @Body user: User): Call<Unit>
+    fun updateUser(@Path("userId") userId: String, @Body user: User): Call<ResponseBody>
 
     companion object {
         fun getInstance(): UserService {

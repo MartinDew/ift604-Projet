@@ -53,10 +53,10 @@ class ProfileFragment : Fragment() {
             if (validateFields(username, email, newPassword, confirmPassword)) {
                 val handler = CoroutineExceptionHandler { _, err -> err.printStackTrace() }
                 lifecycleScope.launch(Dispatchers.IO + handler) {
-                    val state = ApplicationState.getInstance()
+                    val state = ApplicationState.instance
                     try {
                         state.user = User(user.id, username, newPassword, email, user.locations)
-                        state.updateUser()
+                        state.updateUser(true)
 
                         // Update first letter from username in 'circleView'
                         val circleView: TextView = binding.title

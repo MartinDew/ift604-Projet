@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
             val handler = CoroutineExceptionHandler { _, err -> err.printStackTrace() }
             lifecycleScope.launch(Dispatchers.IO + handler) {
-                val state = ApplicationState.getInstance()
+                val state = ApplicationState.instance
                 try {
                     if (binding.toggleLoginType.isChecked) {
                         val email = binding.email.text.toString()
