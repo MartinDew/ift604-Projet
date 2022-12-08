@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.databinding.FragmentLocationsBinding
@@ -40,7 +41,7 @@ class LocationsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val locations = ApplicationState.instance.user.locations
-        binding.locationsRecycler.adapter = LocationsAdapter(locations)
+        binding.locationsRecycler.adapter = LocationsAdapter(locations, lifecycleScope)
     }
 
     override fun onDestroyView() {
