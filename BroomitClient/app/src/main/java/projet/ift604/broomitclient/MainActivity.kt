@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             val locList = ApplicationState.instance.getLocationInProximity(loc, 0.1)
 
             runOnUiThread {
-                Toast.makeText(applicationContext, "${locList.size} POS: ${loc.longitude}, ${loc.latitude}", Toast.LENGTH_LONG).show()
+//                Toast.makeText(applicationContext, "${locList.size} POS: ${loc.longitude}, ${loc.latitude}", Toast.LENGTH_LONG).show()
             }
         }
     }

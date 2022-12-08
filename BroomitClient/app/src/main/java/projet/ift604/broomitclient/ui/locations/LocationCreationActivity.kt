@@ -13,6 +13,7 @@ import projet.ift604.broomitclient.ApplicationState
 import projet.ift604.broomitclient.R
 import projet.ift604.broomitclient.databinding.ActivityCreateLocationBinding
 import projet.ift604.broomitclient.models.Location
+import projet.ift604.broomitclient.ui.find_location.FindLocationActivity
 
 class LocationCreationActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class LocationCreationActivity : AppCompatActivity() {
         appBar.title = getString(R.string.create_location_title)
 
         binding.findLocation.setOnClickListener {
-            val intent = Intent(this, MapsFragment::class.java)
+            val intent = Intent(this, FindLocationActivity::class.java)
             startActivity(intent)
         }
 
