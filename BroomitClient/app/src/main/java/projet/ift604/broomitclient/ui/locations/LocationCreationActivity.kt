@@ -54,7 +54,7 @@ class LocationCreationActivity : AppCompatActivity() {
     // Fix to ensure 'Back' from 'LocationCreationActivity' return here
     // https://stackoverflow.com/questions/31491093/how-to-go-back-to-previous-fragment-from-activity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() === android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             finish()
             return true
         }
