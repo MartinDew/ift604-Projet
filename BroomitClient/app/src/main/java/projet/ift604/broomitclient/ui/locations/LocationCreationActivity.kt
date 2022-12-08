@@ -1,9 +1,7 @@
 package projet.ift604.broomitclient.ui.locations
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -51,6 +49,16 @@ class LocationCreationActivity : AppCompatActivity() {
 
             finish()
         }
+    }
+
+    // Fix to ensure 'Back' from 'LocationCreationActivity' return here
+    // https://stackoverflow.com/questions/31491093/how-to-go-back-to-previous-fragment-from-activity
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() === android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
