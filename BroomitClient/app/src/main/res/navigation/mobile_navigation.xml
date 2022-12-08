@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_transform"
         android:name="projet.ift604.broomitclient.ui.transform.TransformFragment"
-        android:label="@string/menu_transform"
+        android:label="@string/menu_tasks"
         tools:layout="@layout/fragment_transform" />
 
     <fragment
