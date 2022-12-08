@@ -13,7 +13,6 @@ public class UserService
     public UserService(IOptions<BroomitDatabaseSettings> broomitDbSettings)
     {
         MongoClient mongoClient = new(broomitDbSettings.Value.ConnectionString);
-        Console.WriteLine(broomitDbSettings.Value.ConnectionString);
         IMongoDatabase database = mongoClient.GetDatabase(broomitDbSettings.Value.DatabaseName);
 
         _usersCollection = database.GetCollection<User>(broomitDbSettings.Value.UsersCollectionName);
