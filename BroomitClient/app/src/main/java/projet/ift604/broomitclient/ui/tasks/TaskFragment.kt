@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import projet.ift604.broomitclient.ApplicationState
-import projet.ift604.broomitclient.databinding.FragmentTaskBinding
+import projet.ift604.broomitclient.databinding.ActivityCreateTaskBinding
 
-/*class TaskFragment : Fragment() {
-    private var _binding: FragmentTaskBinding? = null
+class TaskFragment : Fragment() {
+    private var _binding: ActivityCreateTaskBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -22,15 +22,15 @@ import projet.ift604.broomitclient.databinding.FragmentTaskBinding
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTaskBinding.inflate(inflater, container, false)
+        _binding = ActivityCreateTaskBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        binding.locationsRecycler.layoutManager = LinearLayoutManager(context)
-
-        binding.addLocation.setOnClickListener {
-            val intent = Intent(context, TaskCreationActivity::class.java)
-            startActivity(intent)
-        }
+//
+//        binding.locationsRecycler.layoutManager = LinearLayoutManager(context)
+//
+//        binding.addLocation.setOnClickListener {
+//            val intent = Intent(context, TaskCreationActivity::class.java)
+//            startActivity(intent)
+//        }
 
         return root
     }
@@ -38,11 +38,11 @@ import projet.ift604.broomitclient.databinding.FragmentTaskBinding
     override fun onResume() {
         super.onResume()
         val tasks = ApplicationState.instance.user.locations[id].tasks
-        binding.taskRecycler.adapter = TasksAdapter(tasks)
+        //binding.taskRecycler.adapter = TasksAdapter(tasks)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-}*/
+}
