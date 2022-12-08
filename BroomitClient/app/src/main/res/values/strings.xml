@@ -58,4 +58,15 @@
     <string name="prompt_owner_phone_number">Numéro de téléphone du proprétaire</string>
     <string name="prompt_find_location">Trouver le domicile</string>
     <string name="label_notes">Notes</string>
+
+    <!-- Strings related to Tasks -->
+    <string name="add_task">Ajouter une tâche</string>
+    <string name="create_task_title">Création d\'une tâche</string>
+    <string name="task_name">Nom de la tâche</string>
+    <string name="task_schedule">Horaire de la tâche</string>
+
+    <string name="schedule_type">Type de récurence</string>
+    <string name="schedule_daily">Par jour</string>
+    <string name="schedule_weekly">Par semaine</string>
+    <string name="schedule_yearly">Par année</string>
 </resources>
