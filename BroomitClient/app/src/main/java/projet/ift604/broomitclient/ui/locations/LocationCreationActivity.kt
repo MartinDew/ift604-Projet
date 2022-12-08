@@ -1,5 +1,6 @@
 package projet.ift604.broomitclient.ui.locations
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,11 @@ class LocationCreationActivity : AppCompatActivity() {
 
         appBar.setDisplayHomeAsUpEnabled(true)
         appBar.title = getString(R.string.create_location_title)
+
+        binding.findLocation.setOnClickListener {
+            val intent = Intent(this, MapsFragment::class.java)
+            startActivity(intent)
+        }
 
         binding.save.setOnClickListener {
             val state = ApplicationState.instance

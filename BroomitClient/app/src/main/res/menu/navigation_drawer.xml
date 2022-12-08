@@ -16,10 +16,10 @@
             android:id="@+id/nav_locations"
             android:icon="@drawable/ic_cottage_black_24dp"
             android:title="@string/menu_locations" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/menu_maps" />
+<!--        <item-->
+<!--            android:id="@+id/nav_map"-->
+<!--            android:icon="@drawable/ic_settings_black_24dp"-->
+<!--            android:title="@string/menu_maps" />-->
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"

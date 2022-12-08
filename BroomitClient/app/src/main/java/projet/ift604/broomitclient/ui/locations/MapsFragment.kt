@@ -1,4 +1,4 @@
-package projet.ift604.broomitclient
+package projet.ift604.broomitclient.ui.locations
 
 import androidx.fragment.app.Fragment
 
@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import projet.ift604.broomitclient.R
 
 class MapsFragment : Fragment() {
 
