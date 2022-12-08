@@ -28,18 +28,18 @@
             android:layout_row="0"/>
         <Button
             android:id="@+id/location_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_columnSpan="1"
             android:layout_column="1"
             android:layout_gravity="end"
             android:layout_row="0"
-            android:gravity="center"
+            android:gravity="center_horizontal|center_vertical"
             android:background="@null"
-            android:textColor="@color/material_dynamic_neutral0"
             android:textSize="20sp"
-            android:text="@string/delete_x"
-            />
+            app:icon="@android:drawable/ic_delete"
+            app:iconSize="20dp"
+            app:iconGravity="top"/>
         <TextView
             android:id="@+id/location_number"
             android:textSize="15sp"

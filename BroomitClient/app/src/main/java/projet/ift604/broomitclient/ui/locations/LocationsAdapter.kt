@@ -10,12 +10,8 @@ import projet.ift604.broomitclient.R
 import projet.ift604.broomitclient.models.Location
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import projet.ift604.broomitclient.ApplicationState
-import kotlin.coroutines.coroutineContext
 
 class LocationsAdapter(private val tasks: ArrayList<Location>, val scope: LifecycleCoroutineScope) : RecyclerView.Adapter<LocationsAdapter.ViewHolder>() {
 
