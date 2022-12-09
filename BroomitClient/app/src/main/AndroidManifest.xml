@@ -25,6 +25,9 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.locations.LocationCreationActivity" />
         </activity>
 
         <service android:name=".LocationBGService" />
@@ -67,7 +70,6 @@
             android:resizeableActivity="true"
             android:theme="@style/Theme.BroomitClient.NoActionBar"
             tools:targetApi="24"></activity>
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
