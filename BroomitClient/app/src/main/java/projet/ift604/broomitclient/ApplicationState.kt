@@ -2,12 +2,14 @@ package projet.ift604.broomitclient
 
 import android.location.Location
 import android.telephony.TelephonyCallback.CellLocationListener
+import com.google.gson.JsonArray
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import projet.ift604.broomitclient.api.NominatimService
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.models.Task
 import projet.ift604.broomitclient.models.User
@@ -52,7 +54,7 @@ class ApplicationState {
     }
 
 
-    // This logs in the server and fetches the user
+    // Se connecter au serveur et récupérer les informations de l'utilisateur
     @Throws(HttpException::class)
     fun login(loginReq: UserService.LoginRequest) {
         val service = UserService.getInstance()
@@ -69,7 +71,7 @@ class ApplicationState {
     fun create(createReq: UserService.CreateRequest) {
         val service = UserService.getInstance()
 
-        // fetch user with username and password
+        // Créer l'utilisateur avec les informations fournies
         val userId = callAPI(service.create(createReq))
 
         getUser(userId!!)
@@ -109,7 +111,7 @@ class ApplicationState {
         return locs
     }
 
-    // Refreshes the user loaded with the api one
+    // Rafraîchir l'utilisateur chargé avec celui de l'API
     @Throws(HttpException::class)
     fun refreshUser() {
         if (!loggedIn) throw Exception("User not loaded")
@@ -117,7 +119,7 @@ class ApplicationState {
         getUser(user.id)
     }
 
-    // Updates the user on the api with the current loaded user
+    // Mettre à jour l'utilisateur sur l'API avec l'utilisateur chargé actuel
     @Throws(HttpException::class)
     fun updateUser(passwordModified: Boolean = false) {
         if (!loggedIn) throw Exception("User not loaded")
@@ -128,6 +130,17 @@ class ApplicationState {
             user.password = ""
 
         callAPI(service.updateUser(user.id, user))
+    }
+
+    // Faire une requête à l'API externe Nominatim
+    // https://nominatim.openstreetmap.org/ui/search.html
+    @Throws(HttpException::class)
+    fun nominatim(query: String): JsonArray? {
+        if (!loggedIn) throw Exception("User not loaded")
+
+        val service = NominatimService.getInstance()
+
+        return callAPI(service.getSearch(query))
     }
 
     companion object {
