@@ -19,11 +19,13 @@ class Schedule(
     enum class ScheduleType { Daily, Weekly, Yearly }
 
     fun getDateTime(): LocalDateTime {
-        return due.toLocalDateTime(TimeZone.UTC)
+        return due.toLocalDateTime(TimeZone.currentSystemDefault())
     }
 
     fun isScheduled(): Boolean {
-        return Clock.System.now() > last_done;
+        val now = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+        val last = last_done.toLocalDateTime(TimeZone.UTC)
+        return now.date > last.date
     }
 
     fun setDone() {
@@ -31,9 +33,9 @@ class Schedule(
 
         // Calculate next due instant
         when (type) {
-            ScheduleType.Daily -> due.plus(every_n.toInt(), DateTimeUnit.DAY, TimeZone.UTC)
-            ScheduleType.Weekly -> due.plus(every_n.toInt(), DateTimeUnit.WEEK, TimeZone.UTC)
-            ScheduleType.Yearly -> due.plus(every_n.toInt(), DateTimeUnit.YEAR, TimeZone.UTC)
+            ScheduleType.Daily -> while (due < Clock.System.now()) due = due.plus(every_n.toInt(), DateTimeUnit.DAY, TimeZone.UTC)
+            ScheduleType.Weekly -> while (due < Clock.System.now()) due = due.plus(every_n.toInt(), DateTimeUnit.WEEK, TimeZone.UTC)
+            ScheduleType.Yearly -> while (due < Clock.System.now()) due = due.plus(every_n.toInt(), DateTimeUnit.YEAR, TimeZone.UTC)
         }
     }
 }

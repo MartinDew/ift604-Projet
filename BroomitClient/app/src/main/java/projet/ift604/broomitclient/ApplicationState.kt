@@ -1,6 +1,8 @@
 package projet.ift604.broomitclient
 
 import android.location.Location
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.models.Task
@@ -75,6 +77,7 @@ class ApplicationState {
         for (loc in user.locations) {
             for (task in loc.tasks) {
                 if (task.isScheduled()) {
+                    task.parent = loc
                     tasks.add(task)
                 }
             }

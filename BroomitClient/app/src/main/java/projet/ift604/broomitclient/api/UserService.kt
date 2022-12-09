@@ -45,6 +45,7 @@ interface UserService {
         fun getInstance(): UserService {
             val gson: Gson = GsonBuilder ()
                 .registerTypeAdapter(Instant::class.java, InstantDateDeserializer())
+                .registerTypeAdapter(Instant::class.java, InstantDateSerializer())
                 .create()
 
             val client = OkHttpClient().newBuilder()
