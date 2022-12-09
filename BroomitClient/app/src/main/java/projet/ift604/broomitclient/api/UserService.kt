@@ -1,5 +1,8 @@
 package projet.ift604.broomitclient.api
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -40,6 +43,10 @@ interface UserService {
 
     companion object {
         fun getInstance(): UserService {
+            val gson: Gson = GsonBuilder ()
+                .registerTypeAdapter(Instant::class.java, InstantDateDeserializer())
+                .create()
+
             val client = OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
@@ -52,7 +59,7 @@ interface UserService {
             val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()
 

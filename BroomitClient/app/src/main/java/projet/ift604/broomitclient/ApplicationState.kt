@@ -1,18 +1,11 @@
 package projet.ift604.broomitclient
 
 import android.location.Location
-import android.telephony.TelephonyCallback.CellLocationListener
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+
 import projet.ift604.broomitclient.api.UserService
 import projet.ift604.broomitclient.models.Task
 import projet.ift604.broomitclient.models.User
 import retrofit2.Call
-import java.lang.Exception
 import java.lang.Math.pow
 import java.lang.Math.sqrt
 
@@ -79,11 +72,9 @@ class ApplicationState {
         if (!loggedIn) throw Exception("User not loaded")
 
         val tasks = ArrayList<Task>()
-        val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-
         for (loc in user.locations) {
             for (task in loc.tasks) {
-                if (task.isScheduled(today)) {
+                if (task.isScheduled()) {
                     tasks.add(task)
                 }
             }

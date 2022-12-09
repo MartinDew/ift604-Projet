@@ -5,12 +5,6 @@ namespace BroomitModels;
 public class Task
 {
     /// <summary>
-    /// Id of the task
-    /// </summary>
-    [JsonPropertyName("id")]
-    public string? Id { get; set; } = Guid.NewGuid().ToString();
-
-    /// <summary>
     /// Name of the task at hand
     /// </summary>
     [JsonPropertyName("name")]
@@ -35,6 +29,4 @@ public class Task
     /// </summary>
     [JsonPropertyName("notify_on_due")]
     public bool NotifyOnDue { get; set; } = false;
-
-    public bool IsScheduled(DateOnly date) => Schedule == null ? false : Schedule.IsScheduled(date);
 }

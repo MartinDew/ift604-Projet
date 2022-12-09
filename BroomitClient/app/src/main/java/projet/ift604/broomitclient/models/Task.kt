@@ -5,13 +5,16 @@ import kotlinx.datetime.LocalDate
 
 @Serializable
 class Task(
-    val id: String,
     val name: String,
     val notes: String,
     val schedule: Schedule?,
     val notify_on_due: Boolean
 ) {
-    fun isScheduled(date: LocalDate): Boolean {
-        return schedule?.isScheduled(date) ?: false
+    fun setDone() {
+        schedule?.setDone()
+    }
+
+    fun isScheduled(): Boolean {
+        return schedule?.isScheduled() ?: false
     }
 }

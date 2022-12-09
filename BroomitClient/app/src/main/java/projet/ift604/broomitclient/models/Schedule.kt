@@ -1,46 +1,39 @@
 package projet.ift604.broomitclient.models
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.plus
+import kotlinx.datetime.toLocalDateTime
 
 @Serializable
 class Schedule(
-    val startDateTime: LocalDateTime,
-    val everyN: UInt,
+    private var due: Instant,
+    private var last_done: Instant,
+    val every_n: UInt,
     val type: ScheduleType,
-    val days: ArrayList<UInt>
 ) {
     enum class ScheduleType { Daily, Weekly, Yearly }
 
-    fun getDate(): LocalDate {
-        return startDateTime.date
+    fun getDateTime(): LocalDateTime {
+        return due.toLocalDateTime(TimeZone.UTC)
     }
 
-    fun getTime(): LocalTime {
-        return startDateTime.time
+    fun isScheduled(): Boolean {
+        return Clock.System.now() > last_done;
     }
 
-    fun isScheduled(date: LocalDate): Boolean {
-        return when (type) {
-            ScheduleType.Daily -> (date.toEpochDays() - getDate().toEpochDays()).toUInt() % everyN == 0U
-            ScheduleType.Yearly -> (date.year - getDate().year).toUInt() % everyN == 0U && date.dayOfMonth == getDate().dayOfMonth && date.month == getDate().month
-            ScheduleType.Weekly -> isScheduledWeek(date)
+    fun setDone() {
+        last_done = Clock.System.now()
+
+        // Calculate next due instant
+        when (type) {
+            ScheduleType.Daily -> due.plus(every_n.toInt(), DateTimeUnit.DAY, TimeZone.UTC)
+            ScheduleType.Weekly -> due.plus(every_n.toInt(), DateTimeUnit.WEEK, TimeZone.UTC)
+            ScheduleType.Yearly -> due.plus(every_n.toInt(), DateTimeUnit.YEAR, TimeZone.UTC)
         }
-    }
-
-    fun isScheduledWeek(date: LocalDate): Boolean {
-        val currentDayOfWeek = date.dayOfWeek.value.toUInt()
-
-        // first day of the current week
-        val currentWeekNumber = date.toEpochDays().toUInt() - currentDayOfWeek / 7U
-        val startWeekNumber = getDate().toEpochDays().toUInt() / 7U
-
-        val weekDiff = currentWeekNumber - startWeekNumber
-
-        return days.any{x -> x == currentDayOfWeek} && (weekDiff % everyN) == 0U
     }
 }
