@@ -8,15 +8,28 @@
 
     <fragment
         android:id="@+id/map"
+        android:tag="map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity"
         tools:layout="@layout/support_simple_spinner_dropdown_item" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#FF3700B3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/map"
+        app:layout_constraintVertical_bias="0.0" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -24,24 +37,32 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map"
+        app:layout_constraintTop_toBottomOf="@id/line"
         app:layout_constraintBottom_toBottomOf="parent"
         android:columnCount="2"
         android:rowCount="1"
         android:gravity="center">
+
+        <!-- TODO: Rework UI/UX, its pretty janky right now -->
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/texts"
-            android:layout_width="wrap_content"
+            android:id="@+id/query"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_column="0"
             android:layout_gravity="start"
-            android:textSize="30sp"
-            android:layout_column="0" />
+            android:layout_marginLeft="10dp"
+            android:maxWidth="250dp"
+            android:maxLength="100"
+            android:minWidth="250dp"
+            android:textSize="20sp" />
         <Button
+            android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:text="@string/submit"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp" />
     </GridLayout>
 
 
