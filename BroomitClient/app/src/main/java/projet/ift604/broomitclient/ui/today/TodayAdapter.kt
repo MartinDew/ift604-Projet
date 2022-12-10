@@ -44,7 +44,6 @@ class TodayAdapter(private val tasks: ArrayList<Task>, val scope: LifecycleCorou
 
             tasks.removeAt(position)
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position, itemCount - position)
 
             true
         }
